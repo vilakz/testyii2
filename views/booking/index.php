@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="booking-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php Pjax::begin(); ?>
+    <?php Pjax::begin(['id' => 'pjax-booking']); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
@@ -23,6 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= \kartik\grid\GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'pjax' => true,
         'floatHeader' => true,
         'columns' => [
             'id',
@@ -35,11 +36,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'filter' => \app\models\Room::getList(),
                 'filterType' => \kartik\grid\GridView::FILTER_SELECT2,
-//                'filterWidgetOptions' => [
-//                    'pluginOptions' => [
-//                        'allowClear' => true,
-//                    ],
-//                ],
+                'filterWidgetOptions' => [
+                    'options' => [
+                        'placeholder' => 'Выберите Номер',
+                    ],
+                    'pluginOptions' => [
+                        'allowClear' => true,
+                    ],
+                ],
+                'headerOptions' => ['style' => 'width:150px;'],
             ],
             'name',
             'phone',
@@ -52,11 +57,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'filter' => \app\models\Booking::getStatusList(),
                 'filterType' => \kartik\grid\GridView::FILTER_SELECT2,
-//                'filterWidgetOptions' => [
-//                    'pluginOptions' => [
-//                        'allowClear' => true,
-//                    ],
-//                ],
+                'filterWidgetOptions' => [
+                    'options' => [
+                        'placeholder' => 'Выберите Статус',
+                    ],
+                    'pluginOptions' => [
+                        'allowClear' => true,
+                    ],
+                ],
+                'headerOptions' => ['style' => 'width:150px;'],
             ],
             [
                 'attribute' => 'start',
